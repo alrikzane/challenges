@@ -1,5 +1,6 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
+from django.urls import reverse
 challenges_of_month = {'january' : "Run 5km every day",
                         'february' : 'Take cold shower every day',
                         'march' : 'Do not eat after 6pm', 
@@ -19,12 +20,11 @@ def index(request):
 
 def int_month(request, month):
     month -=1
-    if month >= 0 and month <= 11:
-        months = list(challenges_of_month.keys())
-        month = months[month]
-        return HttpResponseRedirect('/challenges/'+month)
+    months = list(challenges_of_month.keys())
+    if month >= 0 and month <= len(months)-1:
+        return HttpResponseRedirect(reverse("month_challenge", args=[months[month]]))
     else:
-        return HttpResponseRedirect('/challenges/'+f'{month}_is_wrong_month')
+        return HttpResponseRedirect(reverse("month_challenge", args=[f'{month}_is_wrong_month']))
 
 
 def month(request, month):
