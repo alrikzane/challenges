@@ -8,7 +8,13 @@
 </head>
 <body>
     <h1>{{month|title}}'s challlenge:</h1>
-    <h2>{{challenge|title}}</h2>
+    <h2>
+        {% if challenge %}
+        {{challenge|title}}
+        {% else %}
+        There is no challenge for {{month}} yet.
+        {% endif %}
+    </h2>
     <a href="{% url 'index' %}">Main page</a>
 </body>
 </html>

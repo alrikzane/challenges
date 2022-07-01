@@ -12,7 +12,7 @@ challenges_of_month = {'january' : "Run 5km every day",
                         'september' : 'Do not eat after 6pm', 
                         'october' : "Run 5km every day",
                         'november' : 'Take cold shower every day',
-                        'december' : 'Do not eat after 6pm'
+                        'december' : None
                         }
 def index(request):
     months = list(challenges_of_month.keys())
