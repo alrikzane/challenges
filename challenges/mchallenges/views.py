@@ -15,7 +15,11 @@ challenges_of_month = {'january' : "Run 5km every day",
                         'december' : 'Do not eat after 6pm'
                         }
 def index(request):
-    return HttpResponse('works')
+    months = list(challenges_of_month.keys())
+    return render(request, 'mchallenges/index.html', {
+        'months' : months
+
+    })
 
 
 def int_month(request, month):
