@@ -1,4 +1,4 @@
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
 challenges_of_month = {'january' : "Run 5km every day",
@@ -29,8 +29,15 @@ def int_month(request, month):
 
 def month(request, month):
     months = list(challenges_of_month.keys())
-    if month.lower() in months:
-        challenge_text = month + challenges_of_month[month.lower()]
+    month = month.lower()
+     
+    if month in months:
+        challenge_text = challenges_of_month[month]
+        return render(request, 'mchallenges/challenge.html', {
+            'challenge' : challenge_text,
+            'month' : month
+
+        })
     else:
-        challenge_text = 'Page not found'
-    return HttpResponse(challenge_text)
+        return HttpResponseNotFound()
+    
