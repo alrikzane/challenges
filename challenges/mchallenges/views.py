@@ -28,7 +28,7 @@ def int_month(request, month):
     if month >= 0 and month <= len(months)-1:
         return HttpResponseRedirect(reverse("month_challenge", args=[months[month]]))
     else:
-        return HttpResponseRedirect(reverse("month_challenge", args=[f'{month}_is_wrong_month']))
+        return HttpResponseRedirect(reverse("month_challenge", args=[f'{month+1}_is_wrong_month']))
 
 
 def month(request, month):
