@@ -1,4 +1,4 @@
-from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect
+from django.http import Http404, HttpResponseNotFound, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
 challenges_of_month = {'january' : "Run 5km every day",
@@ -28,7 +28,7 @@ def int_month(request, month):
     if month >= 0 and month <= len(months)-1:
         return HttpResponseRedirect(reverse("month_challenge", args=[months[month]]))
     else:
-        return HttpResponseRedirect(reverse("month_challenge", args=[f'{month+1}_is_wrong_month']))
+        raise Http404()
 
 
 def month(request, month):
@@ -43,5 +43,5 @@ def month(request, month):
 
         })
     else:
-        return HttpResponseNotFound()
+        raise Http404()
     
